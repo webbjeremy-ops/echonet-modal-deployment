@@ -27,7 +27,7 @@ Unlike traditional deployments that require expensive, always-on GPU servers ($4
 
 ## 🏗️ System Architecture
 
-The system utilizes a decoupled microservices approach to ensure security and scalability. 
+The system utilizes a decoupled microservices approach to ensure security and scalability.
 
 ```mermaid
 graph TD
