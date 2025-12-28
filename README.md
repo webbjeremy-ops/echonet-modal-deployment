@@ -14,6 +14,8 @@ This repository contains the reference implementation of a **Scale-to-Zero** dee
 
 Unlike traditional deployments that require expensive, always-on GPU servers ($400+/mo), this system runs on **Modal**, a serverless platform that provisions NVIDIA T4 GPUs only during active inference. This results in an idle cost of **$0.00/mo**, making clinical-grade AI accessible to residency programs and educational workshops.
 
+To ensure clinical-grade accuracy in feedback, the platform's quantification engine is powered by EchoNet-Dynamic, a spatiotemporal 3D convolutional neural network (3D-CNN) rigorously validated on over 10,000 echocardiograms for expert-level assessment of cardiac function.
+
 ### Key Features
 * **💡 Zero-Cost Idle:** Auto-scaling infrastructure ensures you only pay for the seconds the GPU is running.
 * **🛡️ Dual-Model Safety:** A Multimodal LLM (Gemini 2.5 Flash) acts as a "Triage Nurse," verifying the anatomical view (Apical 4-Chamber) before the CNN runs.
@@ -120,10 +122,4 @@ This software is intended for research and educational purposes (e.g., residency
 
 ---
 
-## 📄 Citation
-
-If you use this architecture in your research, please cite:
-
-> [Placeholder: Author Names. "Democratizing Deliberate Practice: Development and Validation of a Serverless, Dual-Model AI Tool for Automated Echocardiography Feedback." Journal of Imaging Informatics in Medicine, 2025.]
-
-*The de-identified video clips used for model training and validation are available via the Stanford EchoNet-Dynamic public repository.*
+*The de-identified video clips used for model training and validation are available via the Stanford EchoNet-Dynamic public repository. https://echonet.github.io/dynamic/*
