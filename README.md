@@ -27,24 +27,36 @@ Unlike traditional deployments that require expensive, always-on GPU servers ($4
 
 ## 🏗️ System Architecture
 
-The system utilizes a decoupled microservices approach to ensure security and scalability.
+The system utilizes a decoupled microservices approach.
 
-```mermaid
-graph TD
-    User[User / Trainee] -->|Upload Video| React[React Frontend]
-    React -->|Store Media| Supabase[Supabase Storage]
-    
-    subgraph "Serverless Backend (Modal)"
-        direction TB
-        Triage[Layer 1: Gemini 2.5 Flash]
-        Quant[Layer 2: EchoNet-Dynamic 3D-CNN]
-    end
-    
-    Supabase -->|Trigger Webhook| Triage
-    Triage -->|If View == Invalid| Reject[Return Error]
-    Triage -->|If View == A4C| Quant
-    Quant -->|LVEF Prediction| DB[Database]
-    DB -->|Feedback Delta| React
+```text
+[ USER / TRAINEE ]
+       │
+       ▼
+[ REACT FRONTEND ] ──────────────┐
+       │                         │
+       ▼                         │
+[ SUPABASE STORAGE ]             │
+       │                         │ (Feedback Loop)
+       ▼                         │
+┌─────────────────────────────┐  │
+│ SERVERLESS BACKEND (MODAL)  │  │
+│                             │  │
+│  1. TRIAGE LAYER (LLM)      │  │
+│     (Gemini 2.5 Flash)      │  │
+│          │                  │  │
+│          ▼                  │  │
+│     Is View Valid? ──NO────►│──┘
+│          │                  │
+│          YES                │
+│          ▼                  │
+│  2. QUANTIFICATION (CNN)    │
+│     (EchoNet-Dynamic)       │
+│          │                  │
+└──────────┼──────────────────┘
+           │
+           ▼
+[ RESULT DATABASE ] ─────────────► [ DELTA DISPLAY ]
 
 The inference backend is defined entirely as code using Python and Modal.
 
