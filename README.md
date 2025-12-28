@@ -1,5 +1,3 @@
-Markdown
-
 # Serverless Echocardiography: Dual-Model Architecture for Educational Feedback
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -56,55 +54,76 @@ The system utilizes a decoupled microservices approach.
            │
            ▼
 [ RESULT DATABASE ] ─────────────► [ DELTA DISPLAY ]
+```
+
 The inference backend is defined entirely as code using Python and Modal.
 
-🛠️ Deployment Guide (Backend)
+---
+
+## 🛠️ Deployment Guide (Backend)
+
 The inference backend is defined entirely as code using Python and Modal.
 
-Prerequisites
-Python 3.12+
+### Prerequisites
+* Python 3.12+
+* A [Modal.com](https://modal.com) account
+* A [Supabase](https://supabase.com) project (for storage/auth)
 
-A Modal.com account
-
-A Supabase project (for storage/auth)
-
-1. Installation
+### 1. Installation
 Clone the repository and install dependencies:
-
-Bash
-
+```bash
 git clone [https://github.com/YOUR_USERNAME/serverless-echo-edu.git](https://github.com/YOUR_USERNAME/serverless-echo-edu.git)
 cd serverless-echo-edu
 pip install -r backend/requirements.txt
-2. Configure Secrets
+```
+
+### 2. Configure Secrets
 Set up your cloud credentials securely using Modal's secret manager. This prevents sensitive API keys from being hardcoded in your scripts.
 
-Bash
-
+```bash
 modal secret create my-app-secrets \
     SUPABASE_URL=your_supabase_url \
     SUPABASE_KEY=your_supabase_key \
     GEMINI_API_KEY=your_google_api_key
-3. Deploy to Cloud
+```
+
+### 3. Deploy to Cloud
 Push the serverless function to the cloud with a single command.
 
-Bash
-
+```bash
 modal deploy backend/app.py
-Note: The system will automatically build the container, download the model weights, and provision the endpoint.
+```
 
-🧪 Testing & Validation
-To verify the system without a frontend, use the included local entrypoint.
+*Note: The system will automatically build the container, download the model weights, and provision the endpoint.*
 
-Edit backend/app.py and insert a valid video URL into the TEST_VIDEO_URL variable.
+---
 
-Run the test function:
+## 🧪 Testing & Validation
 
-Bash
+To verify the system without a frontend, use the included local entrypoint. 
 
+1. Edit `backend/app.py` and insert a valid video URL into the `TEST_VIDEO_URL` variable.
+2. Run the test function:
+```bash
 modal run backend/app.py
-Reproducibility Note
-The image definition in app.py pins specific versions of PyTorch, CUDA, and OpenCV. This ensures that the runtime environment matches the validation conditions described in our manuscript, regardless of the host machine.
+```
 
-⚠️ Medical Disclaimer
-For Educational Use Only. This software is intended for research and educational purposes (e.g., residency training, self-assessment). It is not a registered medical device and has not been cleared by the FDA or EMA for primary clinical diagnosis. The LVEF estimations provided by this tool should never supersede expert clinical judgment.
+### Reproducibility Note
+The `image` definition in `app.py` pins specific versions of PyTorch, CUDA, and OpenCV. This ensures that the runtime environment matches the validation conditions described in our manuscript, regardless of the host machine.
+
+---
+
+## ⚠️ Medical Disclaimer
+
+**For Educational Use Only.**
+This software is intended for research and educational purposes (e.g., residency training, self-assessment). It is **not** a registered medical device and has not been cleared by the FDA or EMA for primary clinical diagnosis. The LVEF estimations provided by this tool should never supersede expert clinical judgment.
+
+---
+
+## 📄 Citation
+
+If you use this architecture in your research, please cite:
+
+> [Placeholder: Author Names. "Democratizing Deliberate Practice: Development and Validation of a Serverless, Dual-Model AI Tool for Automated Echocardiography Feedback." Journal of Imaging Informatics in Medicine, 2025.]
+
+*The de-identified video clips used for model training and validation are available via the Stanford EchoNet-Dynamic public repository.*
