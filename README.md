@@ -14,7 +14,7 @@ This repository contains the reference implementation of a **Scale-to-Zero** dee
 
 Unlike traditional deployments that require expensive, always-on GPU servers ($400+/mo), this system runs on **Modal**, a serverless platform that provisions NVIDIA T4 GPUs only during active inference. This results in an idle cost of **$0.00/mo**, making clinical-grade AI accessible to residency programs and educational workshops.
 
-To ensure clinical-grade accuracy in feedback, the platform's quantification engine is powered by EchoNet-Dynamic, a spatiotemporal 3D convolutional neural network (3D-CNN) rigorously validated on over 10,000 echocardiograms for expert-level assessment of cardiac function. https://echonet.github.io/dynamic/
+To ensure clinical-grade accuracy in feedback, the platform's quantification engine is powered by EchoNet-Dynamic, a spatiotemporal 3D convolutional neural network (3D-CNN) rigorously validated on over 10,000 echocardiograms for expert-level assessment of cardiac function. Info on Echonet-Dynamic may be found here: https://echonet.github.io/dynamic/
 
 ### Key Features
 * **💡 Zero-Cost Idle:** Auto-scaling infrastructure ensures you only pay for the seconds the GPU is running.
