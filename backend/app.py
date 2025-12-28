@@ -1,6 +1,6 @@
 import modal
 import os
-import sys
+import sys 
 import numpy as np
 import cv2
 import torch
